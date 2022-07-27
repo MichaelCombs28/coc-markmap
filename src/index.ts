@@ -89,6 +89,16 @@ export function activate(context: ExtensionContext): void {
   ));
 
   context.subscriptions.push(workspace.registerKeymap(
+    ['n'],
+    'markmap-watch',
+    async () => {
+      const content = await getFullText();
+      await createMarkmapFromVim(content, { watch: true });
+    },
+    { sync: false },
+  ));
+
+  context.subscriptions.push(workspace.registerKeymap(
     ['v'],
     'markmap-create-v',
     async () => {
